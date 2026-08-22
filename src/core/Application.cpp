@@ -19,6 +19,7 @@ Application::Application() {
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
 
     ImGui::StyleColorsDark();
@@ -47,6 +48,7 @@ void Application::Run() {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+        ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport());
 
         if (show_demo_window) {
             ImGui::ShowDemoWindow(&show_demo_window);
@@ -69,6 +71,8 @@ void Application::Run() {
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         glfwSwapBuffers(m_Window);
+
+
     }
 }
 
