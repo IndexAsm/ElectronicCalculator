@@ -1,3 +1,7 @@
 [submodule "libraries/glfw/vendor"]
 	path = libraries/glfw/vendor
 	url = https://github.com/glfw/glfw.git
+[submodule "libraries/imgui/vendor"]
+	path = libraries/imgui/vendor
+	url = https://github.com/ocornut/imgui.git
+	branch = docking
