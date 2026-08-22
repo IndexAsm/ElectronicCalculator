@@ -1,0 +1,39 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Linux",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "PLATFORM=linux",
+                "MODE=debug",
+                "build"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "Build Windows",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "PLATFORM=windows",
+                "MODE=debug",
+                "build"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Clean",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "clean"
+            ],
+            "group": "build"
+        }
+    ]
+}

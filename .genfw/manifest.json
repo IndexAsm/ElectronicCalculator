@@ -1,0 +1,17 @@
+{
+  "genfw_version": "0.1.0",
+  "project_name": "ElectronicCalculator",
+  "framework": "imgui",
+  "platforms": [
+    "linux",
+    "windows"
+  ],
+  "mode": "debug",
+  "windowing": "glfw",
+  "rendering": "opengl3",
+  "fetch_deps": "git",
+  "generated_files": {
+    "src/core/main.cpp": "3cde2b113a03a6fd908c5556f5e06df0b4705703aa02587756da9489860d2f55",
+    "make/framework.mk": "7a022e56811055e0a518e7759ea126239f9c2e634d014cfe6ce6fbf5f22b9f2f"
+  }
+}

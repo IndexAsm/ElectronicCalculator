@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Linux",
+            "type": "cppdbg",
+            "request": "launch",
+
+            "program": "${workspaceFolder}/index",
+
+            "cwd": "${workspaceFolder}",
+
+            "MIMode": "gdb",
+
+            "miDebuggerPath": "/usr/bin/gdb",
+
+            "preLaunchTask": "Build Linux",
+
+            "externalConsole": false
+        }
+    ]
+}
