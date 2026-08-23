@@ -38,3 +38,5 @@ const std::string &LanguageManager::Get(const std::string &key) const
     }
     return translations.at(key);
 }
+
+LanguageManager languageManager;

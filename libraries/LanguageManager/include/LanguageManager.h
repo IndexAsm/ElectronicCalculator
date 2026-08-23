@@ -20,3 +20,5 @@ private:
     std::pair<std::string, std::string> currentLanguage;
     std::unordered_map<std::string, std::string> translations;
 };
+
+extern LanguageManager languageManager;

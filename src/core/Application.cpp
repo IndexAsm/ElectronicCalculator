@@ -8,11 +8,13 @@
 
 
 #include "pch.hpp"
+#include "Debug/DebugWindow.h"
 
 
 
 Application::Application() {
-    m_LanguageManager.Load("assets/lang/en.lang");
+    m_LanguageManager.Load("assets/lang/pl.lang");
+    languageManager.Load("assets/lang/pl.lang");
     m_Window = createWindow(1280, 720, m_LanguageManager("app.title"));
 
     IMGUI_CHECKVERSION();
@@ -39,7 +41,6 @@ Application::~Application(){
 }
 
 void Application::Run() {
-    bool show_demo_window = true;
     ImGuiIO& io = ImGui::GetIO();
 
     while (!glfwWindowShouldClose(m_Window)) {
@@ -50,17 +51,13 @@ void Application::Run() {
         ImGui::NewFrame();
         ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport());
 
-        if (show_demo_window) {
-            ImGui::ShowDemoWindow(&show_demo_window);
-        }
+        
 
-        {
-            ImGui::Begin("Debug");
+        Debug::RenderDebugWindow(io);
+        
 
-            ImGui::Text("Time: %.3f ms (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+        Update();
 
-            ImGui::End();
-        }
 
         ImGui::Render();
         
