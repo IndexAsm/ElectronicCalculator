@@ -13,15 +13,23 @@
 
 
 Application::Application() {
-    m_LanguageManager.Load("assets/lang/pl.lang");
-    languageManager.Load("assets/lang/pl.lang");
-    m_Window = createWindow(1280, 720, m_LanguageManager("app.title"));
+    languageManager.Load("assets/lang/en.lang");
+
+
+    m_Window = createWindow(1280, 720, languageManager("app.title"));
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+
+    std::print("{}",languageManager.GetFontPath().string());
+    // Setting the font according to language
+    ImFont* font = io.Fonts->AddFontFromFileTTF(
+        languageManager.GetFontPath().string().c_str(),
+        18.0f
+    );
 
 
     ImGui::StyleColorsDark();
@@ -73,6 +81,7 @@ void Application::Run() {
     }
 }
 
-void Application::Update()
-{
+void Application::Update() {
+
+    m_OhmsLawCalculator.Update();
 }

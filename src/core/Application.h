@@ -4,7 +4,7 @@
 
 
 #include <LanguageManager.h>
-
+#include "Calculators/OhmsLaw.h"
 
 class Application {
 public: 
@@ -15,6 +15,7 @@ public:
 
     void Update();
 private:
-    LanguageManager m_LanguageManager;
     GLFWwindow* m_Window;
+
+    Calculator::OhmsLaw m_OhmsLawCalculator;
 };

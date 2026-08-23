@@ -5,6 +5,9 @@
 
 
 void LanguageManager::Load(const std::filesystem::path &path) {
+
+    translations.clear();
+
     std::ifstream file(path);
 
     if (file.fail()) {
@@ -14,6 +17,10 @@ void LanguageManager::Load(const std::filesystem::path &path) {
 
     std::getline(file, currentLanguage.first);
     std::getline(file, currentLanguage.second);
+
+    std::string fontPath;
+    std::getline(file, fontPath);
+    m_FontPath = std::filesystem::path(fontPath);
 
 
     std::string key, value;

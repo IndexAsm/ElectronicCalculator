@@ -1,8 +1,27 @@
 English
 English
+assets/fonts/NotoSans-CondensedMedium.ttf
 app.title
 Electronic Calculator
 debug.title
 Debug Window
 debug.demo_checkbox
 Show Demo Window
+calculator.ohms_law.window.title
+Ohm's Law
+calculator.ohms_law.voltage
+Voltage
+calculator.ohms_law.current
+Current
+calculator.ohms_law.resistance
+Resistance
+calculator.ohms_law.power
+Power
+calculator.units.voltage
+V
+calculator.units.current
+A
+calculator.units.resistance
+Ω
+calculator.units.power
+W

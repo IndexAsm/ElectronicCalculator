@@ -1,8 +1,27 @@
 Polish
 Polski
+assets/fonts/NotoSans-CondensedMedium.ttf
 app.title
 Kalkulator Elektroniczny
 debug.title
 Okno Debugowania
 debug.demo_checkbox
 Pokaż Okno Demo
+calculator.ohms_law.window.title
+Prawo Ohma
+calculator.ohms_law.voltage
+Napięcie
+calculator.ohms_law.current
+Prąd
+calculator.ohms_law.resistance
+Opór
+calculator.ohms_law.power
+Moc
+calculator.units.voltage
+V
+calculator.units.current
+A
+calculator.units.resistance
+Ω
+calculator.units.power
+W

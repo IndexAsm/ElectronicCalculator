@@ -1,4 +1,27 @@
 English
 Русский
+assets/fonts/NotoSans-CondensedMedium.ttf
 app.title
 Электронный калькулятор
+debug.title
+Окно отладки
+debug.demo_checkbox
+Показать демонстрационное окно
+calculator.ohms_law.window.title
+Закон Ома
+calculator.ohms_law.voltage
+Напряжение
+calculator.ohms_law.current
+Ток
+calculator.ohms_law.resistance
+Сопротивление
+calculator.ohms_law.power
+Мощность
+calculator.units.voltage
+В
+calculator.units.current
+А
+calculator.units.resistance
+Ω
+calculator.units.power
+Вт

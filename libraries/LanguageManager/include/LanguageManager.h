@@ -16,8 +16,13 @@ public:
         return Get(key);
     }
 
+    const std::filesystem::path& GetFontPath() const {
+        return m_FontPath;
+    }
+
 private:
     std::pair<std::string, std::string> currentLanguage;
+    std::filesystem::path m_FontPath;
     std::unordered_map<std::string, std::string> translations;
 };
 
