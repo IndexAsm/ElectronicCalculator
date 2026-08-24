@@ -1,6 +1,14 @@
 #pragma once
 
+#include <cstdlib>
+
 #include <iostream>
 #include <print>
+#include <cstdio>
+
 #include <cstdint>
-#include <cstdlib>
+#include <cmath>
+
+#include <array>
+#include <vector>
+

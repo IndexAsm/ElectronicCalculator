@@ -5,6 +5,7 @@
 
 #include <LanguageManager.h>
 #include "Calculators/OhmsLaw.h"
+#include "CalculatorMenu.h"
 
 class Application {
 public: 
@@ -18,4 +19,6 @@ private:
     GLFWwindow* m_Window;
 
     Calculator::OhmsLaw m_OhmsLawCalculator;
+
+    Calculator::Menu m_Menu;
 };

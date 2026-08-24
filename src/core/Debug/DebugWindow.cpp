@@ -6,7 +6,7 @@
 namespace Debug {
     void RenderDebugWindow(ImGuiIO& io) {
 
-        static bool ShowDemoWindow = 1;
+        static bool ShowDemoWindow = 0;
 
         if (ShowDemoWindow) {
             ImGui::ShowDemoWindow(&ShowDemoWindow);

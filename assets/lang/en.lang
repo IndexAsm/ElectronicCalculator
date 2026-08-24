@@ -25,3 +25,13 @@ calculator.units.resistance
 Ω
 calculator.units.power
 W
+calculator.calculate
+Calculate
+calculator.error.wrong_values
+Enter correct values
+calculator.error.insufficient_data
+Insufficient data
+calculator.voltage_divider.window.title
+Voltage Divider
+calculator.filter_capacitor.window.title
+Filter Capacitor

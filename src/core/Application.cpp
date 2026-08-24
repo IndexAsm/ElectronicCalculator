@@ -16,7 +16,7 @@ Application::Application() {
     languageManager.Load("assets/lang/en.lang");
 
 
-    m_Window = createWindow(1280, 720, languageManager("app.title"));
+    m_Window = createWindow(480, 600, languageManager("app.title"));
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -61,7 +61,7 @@ void Application::Run() {
 
         
 
-        Debug::RenderDebugWindow(io);
+        //Debug::RenderDebugWindow(io);
         
 
         Update();
@@ -83,5 +83,36 @@ void Application::Run() {
 
 void Application::Update() {
 
-    m_OhmsLawCalculator.Update();
+    //m_OhmsLawCalculator.Update();
+    //m_Menu.Update();
+
+
+    static uint8_t openedWindow = 0;
+
+    ImGui::Begin("Menu");
+
+    if (ImGui::Button(languageManager("calculator.ohms_law.window.title").c_str(), ImVec2(-FLT_MIN, 25))) {
+        openedWindow = 0;
+    }
+
+    if (ImGui::Button(languageManager("calculator.voltage_divider.window.title").c_str(), ImVec2(-FLT_MIN, 25))) {
+        openedWindow = 1;
+    }
+
+    if (ImGui::Button(languageManager("calculator.filter_capacitor.window.title").c_str(), ImVec2(-FLT_MIN, 25))) {
+        openedWindow = 2;
+    }
+
+
+    switch (openedWindow)
+    {
+    case 0: {
+        m_OhmsLawCalculator.Update();   
+        break;
+    }    
+    default:
+        break;
+    }
+
+    ImGui::End();
 }

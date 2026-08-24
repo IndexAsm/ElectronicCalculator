@@ -25,3 +25,9 @@ calculator.units.resistance
 Ω
 calculator.units.power
 Вт
+calculator.calculate
+Рассчитать
+calculator.error.wrong_values
+Введите правильные значения
+calculator.error.insufficient_data
+Недостаточно данных

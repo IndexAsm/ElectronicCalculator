@@ -30,7 +30,7 @@ GLFWwindow *createWindow(int width, int height, const std::string& title)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 
-    GLFWwindow* window = glfwCreateWindow(1280, 720, title.c_str(), nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
     if (window == nullptr) {
         glfwTerminate();
         std::cerr << "Failed to create GLFW window" << std::endl;

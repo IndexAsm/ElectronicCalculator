@@ -2,11 +2,11 @@ Polish
 Polski
 assets/fonts/NotoSans-CondensedMedium.ttf
 app.title
-Kalkulator Elektroniczny
+Kalkulator elektroniczny
 debug.title
-Okno Debugowania
+Okno debugowania
 debug.demo_checkbox
-Pokaż Okno Demo
+Pokaż okno demonstracyjne
 calculator.ohms_law.window.title
 Prawo Ohma
 calculator.ohms_law.voltage
@@ -14,7 +14,7 @@ Napięcie
 calculator.ohms_law.current
 Prąd
 calculator.ohms_law.resistance
-Opór
+Rezystancja
 calculator.ohms_law.power
 Moc
 calculator.units.voltage
@@ -25,3 +25,9 @@ calculator.units.resistance
 Ω
 calculator.units.power
 W
+calculator.calculate
+Oblicz
+calculator.error.wrong_values
+Wprowadź poprawne wartości
+calculator.error.insufficient_data
+Niewystarczające dane
