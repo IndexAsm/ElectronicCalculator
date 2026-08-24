@@ -110,6 +110,10 @@ void Application::Update() {
         m_OhmsLawCalculator.Update();   
         break;
     }    
+    case 1: {
+        m_VoltageDividerCalculator.Update();   
+        break;
+    }    
     default:
         break;
     }

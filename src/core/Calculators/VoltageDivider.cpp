@@ -1,11 +1,12 @@
-#include "OhmsLaw.h"
+#include "VoltageDivider.h"
+
 #include <imgui.h>
 #include <LanguageManager.h>
 #include <cerrno>
 
 #include "pch.hpp"
 
-void Calculator::OhmsLaw::Update() {
+void Calculator::VoltageDivider::Update() {
     ImGuiIO& io = ImGui::GetIO();
 
 
@@ -18,10 +19,10 @@ void Calculator::OhmsLaw::Update() {
     static int Selected = 0;
     
     // Provide easier access, because of constexpr, performance is not affected by unwanted memory read operations
-    constexpr uint32_t VoltageString = 0;
-    constexpr uint32_t CurrentString = 1;
-    constexpr uint32_t ResistanceString = 2;
-    constexpr uint32_t PowerString = 3;
+    constexpr uint32_t InVoltageString = 0;
+    constexpr uint32_t R1String = 1;
+    constexpr uint32_t R2String = 2;
+    constexpr uint32_t OutVoltageString = 3;
     
 
     static std::array<char[16], 4> Strings = {};
@@ -31,21 +32,19 @@ void Calculator::OhmsLaw::Update() {
 
     ImGui::RadioButton("##radio_voltage", &Selected, 0);
     ImGui::SameLine();
-    ImGui::InputText((languageManager("calculator.units.voltage") + "##ohms_law").c_str(), Strings[VoltageString], 16);
+    ImGui::InputText((languageManager("calculator.units.voltage") + "##voltage_divider0").c_str(), Strings[InVoltageString], 16);
 
     ImGui::RadioButton("##radio_current", &Selected, 1);
     ImGui::SameLine();
-    ImGui::InputText((languageManager("calculator.units.current") + "##ohms_law").c_str(), Strings[CurrentString], 16);
+    ImGui::InputText((languageManager("calculator.units.resistance") + "##voltage_divider1").c_str(), Strings[R1String], 16);
 
     ImGui::RadioButton("##radio_resistance", &Selected, 2);
     ImGui::SameLine();
-    ImGui::InputText((languageManager("calculator.units.resistance") + "##ohms_law").c_str(), Strings[ResistanceString], 16);
+    ImGui::InputText((languageManager("calculator.units.resistance") + "##voltage_divider2").c_str(), Strings[R2String], 16);
 
-    ImGui::BeginDisabled();
     ImGui::RadioButton("##radio_power", &Selected, 3);
     ImGui::SameLine();
-    ImGui::InputText((languageManager("calculator.units.power") + "##ohms_law").c_str(), Strings[PowerString], 16);
-    ImGui::EndDisabled();
+    ImGui::InputText((languageManager("calculator.units.voltage") + "##voltage_divider3").c_str(), Strings[OutVoltageString], 16);
 
 
     // Checks if all strings are correct
@@ -107,7 +106,7 @@ void Calculator::OhmsLaw::Update() {
 
 
 
-
+        /*
         switch (Selected)
         {
         case VoltageString: {
@@ -182,6 +181,7 @@ void Calculator::OhmsLaw::Update() {
         default:
             break;
         }
+        */
     }
     if_end:
 

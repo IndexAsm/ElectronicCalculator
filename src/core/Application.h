@@ -6,6 +6,7 @@
 #include <LanguageManager.h>
 #include "Calculators/OhmsLaw.h"
 #include "CalculatorMenu.h"
+#include "Calculators/VoltageDivider.h"
 
 class Application {
 public: 
@@ -19,6 +20,7 @@ private:
     GLFWwindow* m_Window;
 
     Calculator::OhmsLaw m_OhmsLawCalculator;
+    Calculator::VoltageDivider m_VoltageDividerCalculator;
 
     Calculator::Menu m_Menu;
 };

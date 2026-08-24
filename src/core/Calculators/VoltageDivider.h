@@ -2,7 +2,7 @@
 #include "Base.h"
 
 namespace Calculator {
-    class OhmsLaw : public Base
+    class VoltageDivider : public Base
     {
     public:
         virtual void Update() override;
