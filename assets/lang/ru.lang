@@ -31,3 +31,7 @@ calculator.error.wrong_values
 Введите правильные значения
 calculator.error.insufficient_data
 Недостаточно данных
+calculator.voltage_divider.window.title
+Делитель напряжения
+calculator.filter_capacitor.window.title
+Фильтрующий конденсатор

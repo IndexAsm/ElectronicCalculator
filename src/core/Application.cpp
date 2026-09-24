@@ -98,6 +98,33 @@ void Application::Update() {
     if (ImGui::Button(languageManager("calculator.voltage_divider.window.title").c_str(), ImVec2(150, 25))) {
         openedWindow = 1;
     }
+    ImGui::SameLine();
+
+    const char* languages[] = {
+        "English",
+        "Polski",
+        "Русский"
+    };
+
+
+    static int currentLanguage = 0;
+    if (ImGui::Combo("Language", &currentLanguage, languages, IM_ARRAYSIZE(languages)))
+    {
+        switch (currentLanguage)
+        {
+            case 0:
+                languageManager.Load("assets/lang/en.lang");
+                break;
+        
+            case 1:
+                languageManager.Load("assets/lang/pl.lang");
+                break;
+        
+            case 2:
+                languageManager.Load("assets/lang/ru.lang");
+                break;
+        }
+    }
 
 
     switch (openedWindow)

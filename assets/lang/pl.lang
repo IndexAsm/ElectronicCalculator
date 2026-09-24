@@ -2,7 +2,7 @@ Polish
 Polski
 assets/fonts/NotoSans-CondensedMedium.ttf
 app.title
-Kalkulator elektroniczny
+Kalkulator Elektroniczny
 debug.title
 Okno debugowania
 debug.demo_checkbox
@@ -31,3 +31,7 @@ calculator.error.wrong_values
 Wprowadź poprawne wartości
 calculator.error.insufficient_data
 Niewystarczające dane
+calculator.voltage_divider.window.title
+Dzielnik napięcia
+calculator.filter_capacitor.window.title
+Kondensator filtrujący
