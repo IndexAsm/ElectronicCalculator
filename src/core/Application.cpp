@@ -91,16 +91,12 @@ void Application::Update() {
 
     ImGui::Begin("Menu");
 
-    if (ImGui::Button(languageManager("calculator.ohms_law.window.title").c_str(), ImVec2(-FLT_MIN, 25))) {
+    if (ImGui::Button(languageManager("calculator.ohms_law.window.title").c_str(), ImVec2(150, 25))) {
         openedWindow = 0;
     }
-
-    if (ImGui::Button(languageManager("calculator.voltage_divider.window.title").c_str(), ImVec2(-FLT_MIN, 25))) {
+    ImGui::SameLine();
+    if (ImGui::Button(languageManager("calculator.voltage_divider.window.title").c_str(), ImVec2(150, 25))) {
         openedWindow = 1;
-    }
-
-    if (ImGui::Button(languageManager("calculator.filter_capacitor.window.title").c_str(), ImVec2(-FLT_MIN, 25))) {
-        openedWindow = 2;
     }
 
 

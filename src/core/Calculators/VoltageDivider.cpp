@@ -10,8 +10,8 @@ void Calculator::VoltageDivider::Update() {
     ImGuiIO& io = ImGui::GetIO();
 
 
-    ImGui::Begin("##ohms_law");
-    ImGui::Text(languageManager("calculator.ohms_law.window.title").c_str());
+    ImGui::Begin("##voltage_divider");
+    ImGui::Text(languageManager("calculator.voltage_divider.window.title").c_str());
 
 
     
@@ -30,20 +30,56 @@ void Calculator::VoltageDivider::Update() {
     static uint8_t IncorrectValues = false;
     static uint8_t InsufficientInputs = false;
 
-    ImGui::RadioButton("##radio_voltage", &Selected, 0);
-    ImGui::SameLine();
+    // Temporary array
+    static std::string strUnits[] = {
+        languageManager("calculator.units.resistance"),
+        "k" + languageManager("calculator.units.resistance"),
+        "M" + languageManager("calculator.units.resistance"),
+
+    };
+
+    static const char* Units[] = {
+        strUnits[0].c_str(),
+        strUnits[1].c_str(),
+        strUnits[2].c_str(),
+    };
+
+    static int32_t CurrentR1Units = 0;
+    static int32_t CurrentR2Units = 0;
+
+
+    constexpr float labelWidth = 60.0f;
+    constexpr float inputWidth = 300.0f;
+
+    ImGui::RadioButton("Vi##radio_voltage", &Selected, 0);
+    ImGui::SameLine(0.0f, -1.0f);
+    ImGui::SetCursorPosX(labelWidth);
+    ImGui::SetNextItemWidth(inputWidth);
     ImGui::InputText((languageManager("calculator.units.voltage") + "##voltage_divider0").c_str(), Strings[InVoltageString], 16);
 
-    ImGui::RadioButton("##radio_current", &Selected, 1);
+    ImGui::RadioButton("R1##radio_r1", &Selected, 1);
     ImGui::SameLine();
-    ImGui::InputText((languageManager("calculator.units.resistance") + "##voltage_divider1").c_str(), Strings[R1String], 16);
+    ImGui::SetCursorPosX(labelWidth);
+    ImGui::SetNextItemWidth(inputWidth);
+    ImGui::InputText("##voltage_divider1", Strings[R1String], 16);
+    ImGui::SameLine();
+    ImGui::SetNextItemWidth(60.0f);
+    ImGui::Combo("##R1_Units", &CurrentR1Units, Units, IM_ARRAYSIZE(Units));
 
-    ImGui::RadioButton("##radio_resistance", &Selected, 2);
-    ImGui::SameLine();
-    ImGui::InputText((languageManager("calculator.units.resistance") + "##voltage_divider2").c_str(), Strings[R2String], 16);
 
-    ImGui::RadioButton("##radio_power", &Selected, 3);
+    ImGui::RadioButton("R2##radio_r2", &Selected, 2);
     ImGui::SameLine();
+    ImGui::SetCursorPosX(labelWidth);
+    ImGui::SetNextItemWidth(inputWidth);
+    ImGui::InputText("##voltage_divider2", Strings[R2String], 16);
+    ImGui::SameLine();
+    ImGui::SetNextItemWidth(60.0f);
+    ImGui::Combo("##R2_Units", &CurrentR2Units, Units, IM_ARRAYSIZE(Units));
+
+    ImGui::RadioButton("Vo##radio_voltage", &Selected, 3);
+    ImGui::SameLine(0.0f, -1.0f);
+    ImGui::SetCursorPosX(labelWidth);
+    ImGui::SetNextItemWidth(inputWidth);
     ImGui::InputText((languageManager("calculator.units.voltage") + "##voltage_divider3").c_str(), Strings[OutVoltageString], 16);
 
 
@@ -84,14 +120,59 @@ void Calculator::VoltageDivider::Update() {
 
     auto IsInputSufficient = [&]() -> uint8_t {
         uint8_t Inputs {};
-        for (uint32_t i{}; i < 3; i++) {
+        for (uint32_t i{}; i < 4; i++) {
             if (i == Selected)
                 continue;
             if (Strings[i][0] != '\0')
                 Inputs++;
         }
-        return Inputs >= 2;
+        return Inputs >= 3;
 
+    };
+
+    auto ConvertRUnits = [](double& u, uint32_t selected, uint32_t current = 0) -> void {
+        if (selected == 0)
+            switch (current)
+            {
+                case 1: {
+                    u *= 1000.0;
+                    break;
+                }
+                case 2: {
+                    u *= 1000000.0;
+                    break;
+                }
+                default:
+                    break;
+            }
+        else if (selected == 1)
+            switch (current)
+            {
+                case 0: {
+                    u /= 1000.0;
+                    break;
+                }
+                case 2: {
+                    u *= 1000.0;
+                    break;
+                }
+                default:
+                    break;
+            }
+        else if (selected == 2)
+            switch (current)
+            {
+                case 0: {
+                    u /= 1000000.0;
+                    break;
+                }
+                case 1: {
+                    u /= 1000.0;
+                    break;
+                }
+                default:
+                    break;
+            }
     };
 
     if (ImGui::Button(languageManager("calculator.calculate").c_str())) {
@@ -106,82 +187,94 @@ void Calculator::VoltageDivider::Update() {
 
 
 
-        /*
+        
         switch (Selected)
         {
-        case VoltageString: {
-            double Current = std::strtod(Strings[CurrentString], nullptr);
-            double Resistance = std::strtod( Strings[ResistanceString], nullptr);
+        case InVoltageString: {
 
-            double Voltage = Resistance * Current;
+            // Get Data
+            double R1 = std::strtod(Strings[R1String], nullptr);
+            double R2 = std::strtod(Strings[R2String], nullptr);
+            double Vout = std::strtod(Strings[OutVoltageString], nullptr);
 
-            std::snprintf(
-                Strings[VoltageString], 
-                sizeof(Strings[VoltageString]), 
-                "%.10g", 
-                Voltage
-            );
+            // Normalize units
+            ConvertRUnits(R1, 0, CurrentR1Units);
+            ConvertRUnits(R2, 0, CurrentR2Units);
+
             
-            std::snprintf(
-                Strings[PowerString], 
-                sizeof(Strings[PowerString]), 
-                "%.10g", 
-                Voltage * Current
-            );
 
+            
+
+            double Vin = Vout * ((R1 + R2) / R2);
+            std::snprintf(
+                Strings[InVoltageString], 
+                sizeof(Strings[InVoltageString]), 
+                "%.6g", 
+                Vin
+            );
+        
             break;
         }
-        case CurrentString: {
-            double Voltage = std::strtod(Strings[VoltageString], nullptr);
-            double Resistance = std::strtod( Strings[ResistanceString], nullptr);
+        case R1String: {
+            double Vin = std::strtod(Strings[InVoltageString], nullptr);
+            double R2 = std::strtod(Strings[R2String], nullptr);
+            double Vout = std::strtod(Strings[OutVoltageString], nullptr);
+            ConvertRUnits(R2, 0, CurrentR2Units);
             
-            double Current = Voltage / Resistance;
+            double R1 = R2 * ((Vin - Vout) / Vout);
+            ConvertRUnits(R1, CurrentR1Units);
 
             std::snprintf(
-                Strings[CurrentString], 
-                sizeof(Strings[CurrentString]), 
-                "%.10g", 
-                Current
-            );
-            
-            std::snprintf(
-                Strings[PowerString], 
-                sizeof(Strings[PowerString]), 
-                "%.10g", 
-                Voltage * Current
+                Strings[R1String], 
+                sizeof(Strings[R1String]), 
+                "%.6g", 
+                R1
             );
             break;
         }
-        case ResistanceString: {
-            double Voltage = std::strtod(Strings[VoltageString], nullptr);
-            double Current = std::strtod(Strings[CurrentString], nullptr);
+        case R2String: {
+            double Vin = std::strtod(Strings[InVoltageString], nullptr);
+            double R1 = std::strtod(Strings[R1String], nullptr);
+            double Vout = std::strtod(Strings[OutVoltageString], nullptr);
+            ConvertRUnits(R1, 0, CurrentR1Units);
             
-            double Resistance = Voltage / Current;
+            double R2 = R1 * (Vout / (Vin - Vout));
+            ConvertRUnits(R2, CurrentR2Units);
 
             std::snprintf(
-                Strings[ResistanceString], 
-                sizeof(Strings[ResistanceString]), 
-                "%.10g", 
-                Resistance
+                Strings[R2String], 
+                sizeof(Strings[R2String]), 
+                "%.6g", 
+                R2
             );
-            
-            std::snprintf(
-                Strings[PowerString], 
-                sizeof(Strings[PowerString]), 
-                "%.10g", 
-                Voltage * Current
-            );
-            break;
             break;
         }
-        case 3: {
+        case OutVoltageString: {
+            double Vin = std::strtod(Strings[InVoltageString], nullptr);
+            double R1 = std::strtod(Strings[R1String], nullptr);
+            double R2 = std::strtod(Strings[R2String], nullptr);
 
+            // Normalize units
+            ConvertRUnits(R1, 0, CurrentR1Units);
+            ConvertRUnits(R2, 0, CurrentR2Units);
+
+            
+
+            
+
+            double Vout = Vin * (R2 / (R1 + R2));
+            std::snprintf(
+                Strings[OutVoltageString], 
+                sizeof(Strings[OutVoltageString]), 
+                "%.6g", 
+                Vout
+            );
             break;
         }
         default:
             break;
         }
-        */
+        
     }
     if_end:
 

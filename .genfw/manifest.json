@@ -12,6 +12,9 @@
   "fetch_deps": "git",
   "generated_files": {
     "src/core/main.cpp": "3cde2b113a03a6fd908c5556f5e06df0b4705703aa02587756da9489860d2f55",
-    "make/framework.mk": "7a022e56811055e0a518e7759ea126239f9c2e634d014cfe6ce6fbf5f22b9f2f"
-  }
+    "make/framework.mk": "7a022e56811055e0a518e7759ea126239f9c2e634d014cfe6ce6fbf5f22b9f2f",
+    "libraries/imgui/Makefile": "571f598172dfc87ca2d3481cbd9ab49101502ddb7866042f8ea5f2f8d0998c80",
+    "libraries/glfw/Makefile": "26e60934bfaf553031287801eac8a543be015d764d5463c50016a9d87e99fee1"
+  },
+  "libraries": []
 }
